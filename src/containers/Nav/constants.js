@@ -1,7 +1,7 @@
 import { REGISTER, LOGIN, WELCOME } from "../../routes";
 
 export default [
-  { link: REGISTER, text: "Sign Up" },
-  { link: LOGIN, text: "Sign In" },
-  { link: WELCOME, text: "Welcome" },
+  { id: 1, link: REGISTER, text: "Sign Up" },
+  { id: 2, link: LOGIN, text: "Sign In" },
+  { id: 3, link: WELCOME, text: "Welcome" },
 ];

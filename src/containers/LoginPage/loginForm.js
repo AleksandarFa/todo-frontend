@@ -25,9 +25,9 @@ const LoginForm = () => {
             onChange={formik.handleChange}
             value={formik.values.username}
           ></input>
-          {formik.errors.first_name ? (
+          {formik.errors.username ? (
             <small className="form-text text-muted">
-              {formik.errors.first_name}
+              {formik.errors.username}
             </small>
           ) : null}
         </div>
@@ -40,9 +40,9 @@ const LoginForm = () => {
             onChange={formik.handleChange}
             value={formik.values.password}
           ></input>
-          {formik.errors.first_name ? (
+          {formik.errors.password ? (
             <small className="form-text text-muted">
-              {formik.errors.first_name}
+              {formik.errors.password}
             </small>
           ) : null}
         </div>

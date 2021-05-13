@@ -11,7 +11,7 @@ export default () => {
       <ul className="nav border m-4">
         {links.map((link) => {
           return (
-            <li className="nav-item">
+            <li key={link.id} className="nav-item">
               <Link className="nav-link" to={link.link}>
                 {link.text}
               </Link>
