@@ -1,19 +1,38 @@
 import apiClient from "./baseApiService";
 
 class UserApiService {
-  ENDPOINTS = {
-    REGISTER: "auth/register/",
-    LOGIN: "auth/login/",
-  };
+  constructor() {
+    this.ENDPOINTS = {
+      REGISTER: "auth/register/",
+      LOGIN: "auth/login/",
+    };
+    this.apiClient = apiClient;
+  }
 
-  static async createUser(userData) {
+  createUser = async (userData) => {
     try {
-      const response = await apiClient.post(this.ENDPOINTS.REGISTER, userData);
+      const response = await this.apiClient.post(
+        this.ENDPOINTS.REGISTER,
+        userData
+      );
       return response.data;
     } catch (err) {
       console.log(err);
     }
-  }
+  };
+
+  loginUser = async (userData) => {
+    try {
+      const response = await this.apiClient.post(
+        this.ENDPOINTS.LOGIN,
+        userData
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 }
 
-export default UserApiService;
+const ApiService = new UserApiService();
+export default ApiService;

@@ -1,13 +1,15 @@
 import React from "react";
-import UserApiService from "../../api/userApiService";
+import { registerUser } from "../../store/auth/actions";
 import { useFormik } from "formik";
 import registerSchema from "./validations";
+import { useDispatch } from "react-redux";
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      first_name: "",
-      last_name: "",
+      firstName: "",
+      lastName: "",
       username: "",
       email: "",
       password: "",
@@ -15,7 +17,7 @@ const RegisterForm = () => {
     },
     validationSchema: registerSchema,
     onSubmit: (values) => {
-      UserApiService.createUser(values);
+      dispatch(registerUser(values));
     },
   });
   return (
@@ -23,32 +25,32 @@ const RegisterForm = () => {
       <form onSubmit={formik.handleSubmit}>
         <div className="form-row">
           <div className="col">
-            <label htmlFor="first_name">First Name:</label>
+            <label htmlFor="firstName">First Name:</label>
             <input
               type="text"
               className="form-control"
-              id="first_name"
+              id="firstName"
               onChange={formik.handleChange}
-              value={formik.values.first_name}
+              value={formik.values.firstName}
             ></input>
-            {formik.errors.first_name ? (
+            {formik.errors.firstName ? (
               <small className="form-text text-muted">
-                {formik.errors.first_name}
+                {formik.errors.firstName}
               </small>
             ) : null}
           </div>
           <div className="col">
-            <label htmlFor="last_name">Last Name:</label>
+            <label htmlFor="lastName">Last Name:</label>
             <input
               type="text"
               className="form-control"
-              id="last_name"
+              id="lastName"
               onChange={formik.handleChange}
-              value={formik.values.last_name}
+              value={formik.values.lastName}
             ></input>
-            {formik.errors.last_name ? (
+            {formik.errors.lastName ? (
               <small className="form-text text-muted">
-                {formik.errors.last_name}
+                {formik.errors.lastName}
               </small>
             ) : null}
           </div>

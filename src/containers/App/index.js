@@ -1,10 +1,11 @@
 import React from "react";
 import Routes from "./Routes";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Router } from "react-router-dom";
+import history from "./history";
 
 function App() {
   return (
-    <Router>
+    <Router history={history}>
       <div className="App">
         <Routes />
       </div>

@@ -1,8 +1,11 @@
 import React from "react";
 import { useFormik } from "formik";
 import loginSchema from "./validations";
+import { loginUser } from "../../store/auth/actions";
+import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -10,7 +13,7 @@ const LoginForm = () => {
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(loginUser(values));
     },
   });
   return (
