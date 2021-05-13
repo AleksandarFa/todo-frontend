@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
+import loginSchema from "./validations";
 
 const LoginForm = () => {
   const formik = useFormik({
@@ -7,6 +8,7 @@ const LoginForm = () => {
       username: "",
       password: "",
     },
+    validationSchema: loginSchema,
     onSubmit: (values) => {
       console.log(values);
     },
@@ -23,6 +25,11 @@ const LoginForm = () => {
             onChange={formik.handleChange}
             value={formik.values.username}
           ></input>
+          {formik.errors.first_name ? (
+            <small className="form-text text-muted">
+              {formik.errors.first_name}
+            </small>
+          ) : null}
         </div>
         <div className="form-group">
           <label htmlFor="password">Password:</label>
@@ -33,6 +40,11 @@ const LoginForm = () => {
             onChange={formik.handleChange}
             value={formik.values.password}
           ></input>
+          {formik.errors.first_name ? (
+            <small className="form-text text-muted">
+              {formik.errors.first_name}
+            </small>
+          ) : null}
         </div>
         <button type="submit" className="btn btn-primary">
           Sign In

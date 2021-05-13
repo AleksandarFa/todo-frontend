@@ -1,27 +1,7 @@
 import React from "react";
 import UserApiService from "../../api/userApiService";
 import { useFormik } from "formik";
-import * as Yup from "yup";
-
-const validationSchema = Yup.object().shape({
-  first_name: Yup.string()
-    .required("First name is Required.")
-    .min(1, "First name is too Shor."),
-  last_name: Yup.string()
-    .required("First name is Required.")
-    .min(1, "Last name is too short."),
-  username: Yup.string()
-    .required("Username is Required.")
-    .min(4, "Username is too short. Should be 4 charas minimum."),
-  email: Yup.string().email().required("Email is required."),
-  password: Yup.string()
-    .required("No password provided.")
-    .min(8, "Password is too short. Should be 8 chars minimum."),
-  password2: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Passwords must match"
-  ),
-});
+import registerSchema from "./validations";
 
 const RegisterForm = () => {
   const formik = useFormik({
@@ -31,9 +11,9 @@ const RegisterForm = () => {
       username: "",
       email: "",
       password: "",
-      password2: "",
+      confirmPassword: "",
     },
-    validationSchema: validationSchema,
+    validationSchema: registerSchema,
     onSubmit: (values) => {
       UserApiService.createUser(values);
     },
@@ -123,13 +103,13 @@ const RegisterForm = () => {
           <input
             type="password"
             className="form-control"
-            id="password2"
+            id="confirmPassword"
             onChange={formik.handleChange}
-            value={formik.values.password2}
+            value={formik.values.confirmPassword}
           ></input>
-          {formik.errors.password2 ? (
+          {formik.errors.confirmPassword ? (
             <small className="form-text text-muted">
-              {formik.errors.password2}
+              {formik.errors.confirmPassword}
             </small>
           ) : null}
         </div>
