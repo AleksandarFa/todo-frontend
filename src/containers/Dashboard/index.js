@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeSelectUser } from "../../store/auth/selectors";
 import { logoutRequest } from "../../store/auth/actions";
+import { requestAllTodos } from "../../store/todos/actions";
+import { makeSelectAllTodos } from "../../store/todos/selectors";
 
 const Dashboard = () => {
   const user = useSelector(makeSelectUser());
+  const todos = useSelector(makeSelectAllTodos());
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(requestAllTodos());
+  }, []);
   const handleLogout = () => {
     dispatch(logoutRequest());
   };

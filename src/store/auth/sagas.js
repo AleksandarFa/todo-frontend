@@ -19,7 +19,7 @@ import {
   logoutSuccess,
 } from "../auth/actions";
 
-import { removeItem } from "../../utils/localStorage";
+import { removeItem, setItem } from "../../utils/localStorage";
 
 export function* register({ payload }) {
   try {
@@ -38,8 +38,9 @@ export function* register({ payload }) {
 
 export function* login({ payload }) {
   try {
-    const response = yield call(UserApiService.loginUser, payload);
-    yield put(setToken(response.access));
+    const { data } = yield call(UserApiService.loginUser, payload);
+    yield call(UserApiService.setAuthToken, data.access);
+    yield put(setToken(data.access));
     yield put(fetchAuthUser());
     yield put(loginSuccess());
     yield put(push(DASHBOARD));
