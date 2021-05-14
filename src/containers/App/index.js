@@ -1,15 +1,15 @@
 import React from "react";
 import Routes from "./Routes";
-import { Router } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
 import history from "./history";
 
 function App() {
   return (
-    <Router history={history}>
+    <ConnectedRouter history={history}>
       <div className="App">
         <Routes />
       </div>
-    </Router>
+    </ConnectedRouter>
   );
 }
 

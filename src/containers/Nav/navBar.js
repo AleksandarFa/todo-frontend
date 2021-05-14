@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import fullNav from "./constants";
 
-export default () => {
-  // eslint-disable-next-line
-  const [links, setLinks] = useState(fullNav);
-
+export default ({ links }) => {
   return (
     <nav>
       <ul className="nav border m-4">

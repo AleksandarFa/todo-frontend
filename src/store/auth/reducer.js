@@ -1,9 +1,10 @@
 import {
-  REGISTER_REQUEST,
   REGISTER_SUCCESS,
   LOGIN_REQUEST,
+  LOGOUT_REQUEST,
   SET_TOKEN,
   FETCH_USER_SUCCESS,
+  SET_AUTHENTICATED,
 } from "./actionTypes";
 
 import { getItem } from "../../utils/localStorage";
@@ -16,8 +17,6 @@ export const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case REGISTER_REQUEST:
-      break;
     case REGISTER_SUCCESS:
       return {
         ...state,
@@ -27,6 +26,12 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: payload,
+      };
+    case LOGOUT_REQUEST:
+      return {
+        ...state,
+        user: null,
+        token: null,
       };
     case SET_TOKEN:
       return {

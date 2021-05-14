@@ -2,6 +2,9 @@ import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
   LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
   SET_TOKEN,
   FETCH_USER_REQUEST,
   FETCH_USER_SUCCESS,
@@ -51,5 +54,23 @@ export const fetchAuthUserSuccess = ({ first_name, last_name }) => {
   return {
     type: FETCH_USER_SUCCESS,
     payload: { first_name, last_name },
+  };
+};
+
+export const loginSuccess = () => {
+  return {
+    type: LOGIN_SUCCESS,
+  };
+};
+
+export const logoutRequest = () => {
+  return {
+    type: LOGOUT_REQUEST,
+  };
+};
+
+export const logoutSuccess = () => {
+  return {
+    type: LOGOUT_SUCCESS,
   };
 };

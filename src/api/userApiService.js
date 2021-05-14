@@ -20,7 +20,6 @@ class UserApiService {
       setItem("token", token);
       this.attachHeaders({ Authorization: `Bearer ${token}` });
     }
-    console.log(this.apiClient.defaults.headers);
   };
 
   createUser = async (userData) => {

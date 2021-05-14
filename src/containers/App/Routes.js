@@ -1,5 +1,7 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
+import PrivateRoute from "../PrivateRoute";
+import PublicRoute from "../PublicRoute";
 
 import { LOGIN, REGISTER, WELCOME, DASHBOARD } from "../../routes";
 import LoginPage from "../LoginPage";
@@ -10,10 +12,10 @@ import Dashboard from "../Dashboard";
 export default function Routers() {
   return (
     <Switch>
-      <Route path={LOGIN} component={LoginPage} />
-      <Route path={REGISTER} component={RegisterPage} />
-      <Route path={DASHBOARD} component={Dashboard} />
-      <Route path={WELCOME} component={WelcomePage} />
+      <PublicRoute path={LOGIN} component={LoginPage} />
+      <PublicRoute path={REGISTER} component={RegisterPage} />
+      <PrivateRoute path={DASHBOARD} component={Dashboard} />
+      <PublicRoute path={WELCOME} component={WelcomePage} />
     </Switch>
   );
 }
