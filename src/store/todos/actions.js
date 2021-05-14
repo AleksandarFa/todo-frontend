@@ -6,7 +6,7 @@ export const requestAllTodos = () => {
   };
 };
 
-export const AllTodosSuccess = ({ todos }) => {
+export const AllTodosSuccess = (todos) => {
   return {
     type: ALL_TODOS_SUCCESS,
     payload: todos,

@@ -10,11 +10,12 @@ const Dashboard = () => {
   const todos = useSelector(makeSelectAllTodos());
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(requestAllTodos());
-  }, []);
   const handleLogout = () => {
     dispatch(logoutRequest());
+  };
+
+  const handleShowTodos = () => {
+    dispatch(requestAllTodos());
   };
   return (
     <div>
@@ -28,6 +29,16 @@ const Dashboard = () => {
           <p>Last name: {user.last_name}</p>
         </div>
       )}
+      <button onClick={handleShowTodos} className="btn btn-primary">
+        Show all todos
+      </button>
+      {todos.map((todo) => {
+        return (
+          <div key={todo.id}>
+            <p>{todo.title}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };

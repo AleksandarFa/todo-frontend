@@ -6,7 +6,6 @@ import { AllTodosSuccess } from "./actions";
 export function* allTodosRequest() {
   try {
     const response = yield call(UserApiService.fetchAllUserTodos);
-    console.log(UserApiService);
     yield put(AllTodosSuccess(response));
   } catch (err) {
     console.log(err);

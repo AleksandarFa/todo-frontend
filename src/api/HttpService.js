@@ -12,7 +12,8 @@ class HttpClient {
   };
 
   attachHeaders = (headers) => {
-    Object.assign(this.client.defaults.headers, headers);
+    Object.assign(this.client.defaults.headers.common, headers);
+    console.log("HTTP Client", this.client.defaults.headers);
   };
 }
 

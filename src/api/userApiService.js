@@ -41,6 +41,8 @@ class UserApiService {
       data: userData,
     });
 
+    this.setAuthToken(response.data.access);
+
     return response;
   };
 
