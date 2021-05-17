@@ -3,8 +3,10 @@ import { useFormik } from "formik";
 import loginSchema from "./validations";
 import { loginUser } from "../../store/auth/actions";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const LoginForm = () => {
+  const [t, i18n] = useTranslation("translation");
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -20,7 +22,7 @@ const LoginForm = () => {
     <div className="container w-50 border p-3">
       <form onSubmit={formik.handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">{t("login.username")}</label>
           <input
             type="text"
             className="form-control"
@@ -35,7 +37,7 @@ const LoginForm = () => {
           ) : null}
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">{t("login.password")}</label>
           <input
             type="password"
             className="form-control"

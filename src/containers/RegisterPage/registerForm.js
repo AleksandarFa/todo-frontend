@@ -1,10 +1,12 @@
 import React from "react";
 import { registerUser } from "../../store/auth/actions";
 import { useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 import registerSchema from "./validations";
 import { useDispatch } from "react-redux";
 
 const RegisterForm = () => {
+  const [t, i18n] = useTranslation("translation");
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -25,7 +27,7 @@ const RegisterForm = () => {
       <form onSubmit={formik.handleSubmit}>
         <div className="form-row">
           <div className="col">
-            <label htmlFor="firstName">First Name:</label>
+            <label htmlFor="firstName">{t("register.firstName")}</label>
             <input
               type="text"
               className="form-control"
@@ -40,7 +42,7 @@ const RegisterForm = () => {
             ) : null}
           </div>
           <div className="col">
-            <label htmlFor="lastName">Last Name:</label>
+            <label htmlFor="lastName">{t("register.lastName")}</label>
             <input
               type="text"
               className="form-control"
@@ -56,7 +58,7 @@ const RegisterForm = () => {
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">{t("login.username")}</label>
           <input
             type="text"
             className="form-control"
@@ -71,7 +73,7 @@ const RegisterForm = () => {
           ) : null}
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">{t("register.email")}</label>
           <input
             type="email"
             className="form-control"
@@ -86,7 +88,7 @@ const RegisterForm = () => {
           ) : null}
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">{t("login.password")}</label>
           <input
             type="password"
             className="form-control"
@@ -101,7 +103,7 @@ const RegisterForm = () => {
           ) : null}
         </div>
         <div className="form-group">
-          <label htmlFor="password2">Confirm Password:</label>
+          <label htmlFor="password2">{t("register.confirmPassword")}</label>
           <input
             type="password"
             className="form-control"
