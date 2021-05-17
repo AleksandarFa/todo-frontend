@@ -6,6 +6,8 @@ import { requestAllTodos } from "../../store/todos/actions";
 import { makeSelectAllTodos } from "../../store/todos/selectors";
 import { CREATE_TODO } from "../../routes";
 
+import TodoItem from "../Todo/";
+
 const Dashboard = () => {
   const user = useSelector(makeSelectUser());
   const todos = useSelector(makeSelectAllTodos());
@@ -38,9 +40,14 @@ const Dashboard = () => {
         {todos &&
           todos.map((todo) => {
             return (
-              <li className="list-group-item" key={todo.id}>
-                {todo.title}
-              </li>
+              <TodoItem
+                id={todo.id}
+                key={todo.id}
+                title={todo.title}
+                priority={todo.priority_choice}
+                description={todo.description}
+                completed={todo.completed}
+              />
             );
           })}
       </ul>

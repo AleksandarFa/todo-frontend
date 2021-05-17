@@ -6,4 +6,7 @@ const selectTodo = (state) => state.todos || initialState;
 const makeSelectAllTodos = () =>
   createSelector(selectTodo, (substate) => substate.todos);
 
-export { makeSelectAllTodos };
+const makeSelectSingleTodo = () =>
+  createSelector(selectTodo, (substate) => substate.todo);
+
+export { makeSelectAllTodos, makeSelectSingleTodo };

@@ -11,6 +11,7 @@ class UserApiService {
       USER: "users/me/",
       ALL_TODOS: "api/v1/todos/",
       CREATE_TODO: "api/v1/create-todo/",
+      SINGLE_TODO: `api/v1/todos/`,
     };
     this.httpService = httpService;
   }
@@ -73,6 +74,19 @@ class UserApiService {
     }
   };
 
+  fetchCurrentTodo = async (todoId) => {
+    this.setAuthToken(getItem("token"));
+    try {
+      const response = await this.httpService.request({
+        url: this.ENDPOINTS.SINGLE_TODO + todoId + "/",
+        method: HTTP_METHODS.GET,
+      });
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   createTodo = async (todoData) => {
     this.setAuthToken(getItem("token"));
     try {
@@ -84,6 +98,15 @@ class UserApiService {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  updateTodo = async (todoId, todoData) => {
+    this.setAuthToken(getItem("token"));
+    const response = await this.httpService.request({
+      url: this.ENDPOINTS.SINGLE_TODO + todoId + "/",
+      method: HTTP_METHODS.PUT,
+      data: todoData,
+    });
   };
 }
 

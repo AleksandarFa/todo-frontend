@@ -4,15 +4,16 @@ import { useFormik } from "formik";
 import todoSchema from "./validations";
 import { createTodo } from "../../store/todos/actions";
 import { makeSelectUser } from "../../store/auth/selectors";
+import { makeSelectSingleTodo } from "../../store/todos/selectors";
 import { fetchAuthUser } from "../../store/auth/actions";
+import { singleTodoRequest, updateTodo } from "../../store/todos/actions";
+import { useParams } from "react-router-dom";
 
-const TodoForm = () => {
+const TodoForm = ({ isEditing }) => {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(makeSelectUser());
-
-  useEffect(() => {
-    dispatch(fetchAuthUser());
-  }, []);
+  const todo = useSelector(makeSelectSingleTodo());
 
   const formik = useFormik({
     initialValues: {
@@ -24,9 +25,18 @@ const TodoForm = () => {
     validationSchema: todoSchema,
     onSubmit: (values) => {
       values["user"] = user.id;
-      dispatch(createTodo(values));
+      isEditing ? dispatch(updateTodo(values)) : dispatch(createTodo(values));
     },
   });
+
+  useEffect(() => {
+    dispatch(fetchAuthUser());
+    isEditing ? dispatch(singleTodoRequest(id)) : null;
+  }, []);
+
+  useEffect(() => {
+    formik.setValues(todo);
+  }, [todo]);
 
   return (
     <div className="container w-50 border p-3">
