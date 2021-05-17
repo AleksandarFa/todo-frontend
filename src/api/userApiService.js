@@ -1,4 +1,4 @@
-import apiClient from "./baseApiService";
+import { getItem } from "../utils/localStorage";
 import httpService from "./HttpService";
 import { setItem } from "../utils/localStorage";
 import { HTTP_METHODS } from "../constants";
@@ -10,6 +10,7 @@ class UserApiService {
       LOGIN: "auth/login/",
       USER: "users/me/",
       ALL_TODOS: "api/v1/todos/",
+      CREATE_TODO: "api/v1/create-todo/",
     };
     this.httpService = httpService;
   }
@@ -47,6 +48,7 @@ class UserApiService {
   };
 
   fetchUserData = async () => {
+    this.setAuthToken(getItem("token"));
     try {
       const response = await this.httpService.request({
         url: this.ENDPOINTS.USER,
@@ -59,12 +61,26 @@ class UserApiService {
   };
 
   fetchAllUserTodos = async () => {
+    this.setAuthToken(getItem("token"));
     try {
       const response = await this.httpService.request({
         url: this.ENDPOINTS.ALL_TODOS,
         method: HTTP_METHODS.GET,
       });
       return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  createTodo = async (todoData) => {
+    this.setAuthToken(getItem("token"));
+    try {
+      const response = await this.httpService.request({
+        url: this.ENDPOINTS.CREATE_TODO,
+        method: HTTP_METHODS.POST,
+        data: todoData,
+      });
     } catch (err) {
       console.log(err);
     }

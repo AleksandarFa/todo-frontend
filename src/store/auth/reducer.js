@@ -4,7 +4,6 @@ import {
   LOGOUT_REQUEST,
   SET_TOKEN,
   FETCH_USER_SUCCESS,
-  SET_AUTHENTICATED,
 } from "./actionTypes";
 
 import { getItem } from "../../utils/localStorage";
