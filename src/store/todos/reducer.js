@@ -1,4 +1,8 @@
-import { ALL_TODOS_SUCCESS, SINGLE_TODO_SUCCESS } from "./actionTypes";
+import {
+  ALL_TODOS_SUCCESS,
+  SINGLE_TODO_SUCCESS,
+  DELETE_TODO,
+} from "./actionTypes";
 
 export const initialState = {
   todos: [],
@@ -10,7 +14,7 @@ export const initialState = {
   },
 };
 
-const todoReducer = (state = initialState, { type, payload }) => {
+const todoReducer = (state = initialState, { type, payload, todoId }) => {
   switch (type) {
     case ALL_TODOS_SUCCESS:
       return {
@@ -21,6 +25,11 @@ const todoReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         todo: payload,
+      };
+    case DELETE_TODO:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== todoId),
       };
     default:
       return state;

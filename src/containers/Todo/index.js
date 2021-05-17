@@ -8,7 +8,7 @@ const TodoItem = ({ id, title, priority, description, completed }) => {
   const dispatch = useDispatch();
   const handleDelete = () => {
     dispatch(deleteTodo(id));
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (
