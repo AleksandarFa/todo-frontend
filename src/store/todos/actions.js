@@ -5,6 +5,7 @@ import {
   SINGLE_TODO_SUCCESS,
   CREATE_TODO,
   UPDATE_TODO,
+  DELETE_TODO,
 } from "./actionTypes";
 
 export const requestAllTodos = () => {
@@ -13,7 +14,7 @@ export const requestAllTodos = () => {
   };
 };
 
-export const AllTodosSuccess = (todos) => {
+export const allTodosSuccess = (todos) => {
   return {
     type: ALL_TODOS_SUCCESS,
     payload: todos,
@@ -58,5 +59,12 @@ export const updateTodo = ({
   return {
     type: UPDATE_TODO,
     payload: { user, id, title, description, priority_choices, completed },
+  };
+};
+
+export const deleteTodo = (todoId) => {
+  return {
+    type: DELETE_TODO,
+    todoId,
   };
 };

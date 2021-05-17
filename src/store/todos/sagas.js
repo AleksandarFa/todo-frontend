@@ -6,15 +6,16 @@ import {
   CREATE_TODO,
   SINGLE_TODO_REQUEST,
   UPDATE_TODO,
+  DELETE_TODO,
 } from "./actionTypes";
 
-import { AllTodosSuccess, singleTodoSuccess } from "./actions";
+import { allTodosSuccess, singleTodoSuccess } from "./actions";
 import { DASHBOARD } from "../../routes";
 
 export function* allTodosRequest() {
   try {
     const response = yield call(UserApiService.fetchAllUserTodos);
-    yield put(AllTodosSuccess(response));
+    yield put(allTodosSuccess(response));
   } catch (err) {
     console.log(err);
   }
@@ -52,9 +53,19 @@ export function* updateTodo(newTodo) {
   }
 }
 
+export function* deleteTodo(payload) {
+  try {
+    const response = yield call(UserApiService.deleteTodo, payload.todoId);
+    yield put(push(DASHBOARD));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export default function* todoSaga() {
   yield takeLatest(ALL_TODOS_REQUEST, allTodosRequest);
   yield takeLatest(CREATE_TODO, createTodo);
   yield takeLatest(SINGLE_TODO_REQUEST, singleTodoRequest);
   yield takeLatest(UPDATE_TODO, updateTodo);
+  yield takeLatest(DELETE_TODO, deleteTodo);
 }

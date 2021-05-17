@@ -1,8 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { EDIT_TODO } from "../../routes";
+import { deleteTodo } from "../../store/todos/actions";
 
 const TodoItem = ({ id, title, priority, description, completed }) => {
+  const dispatch = useDispatch();
+  const handleDelete = () => {
+    dispatch(deleteTodo(id));
+    window.location.reload();
+  };
+
   return (
     <li className="list-group-item">
       <div className="todo-item">
@@ -19,7 +27,9 @@ const TodoItem = ({ id, title, priority, description, completed }) => {
           )}
         </div>
 
-        <button className="btn btn-danger mr-2">Delete</button>
+        <button className="btn btn-danger mr-2" onClick={handleDelete}>
+          Delete
+        </button>
         <Link className="btn btn-warning" to={EDIT_TODO.replace(":id", id)}>
           Edit
         </Link>

@@ -108,6 +108,14 @@ class UserApiService {
       data: todoData,
     });
   };
+
+  deleteTodo = async (todoId) => {
+    this.setAuthToken(getItem("token"));
+    const response = await this.httpService.request({
+      url: this.ENDPOINTS.SINGLE_TODO + todoId + "/",
+      method: HTTP_METHODS.DELETE,
+    });
+  };
 }
 
 const ApiService = new UserApiService();
