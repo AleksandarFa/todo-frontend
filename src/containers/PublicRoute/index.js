@@ -6,7 +6,7 @@ import { makeSelectAuthenticated } from "../../store/auth/selectors";
 
 const PublicRoute = ({ component: Component, ...rest }) => {
   const isAuthenticated = useSelector(makeSelectAuthenticated());
-  console.log(isAuthenticated);
+
   return (
     <Route
       {...rest}

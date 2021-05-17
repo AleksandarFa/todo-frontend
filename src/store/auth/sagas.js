@@ -38,8 +38,8 @@ export function* register({ payload }) {
 
 export function* login({ payload }) {
   try {
-    const response = yield call(UserApiService.loginUser, payload);
-    yield put(setToken(response.access));
+    const { data } = yield call(UserApiService.loginUser, payload);
+    yield put(setToken(data.access));
     yield put(fetchAuthUser());
     yield put(loginSuccess());
     yield put(push(DASHBOARD));

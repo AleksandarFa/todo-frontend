@@ -1,7 +1,7 @@
-import defaultAxios from "axios";
+import axios from "axios";
 import config from "../config";
 
-const apiClient = defaultAxios.create({
+const apiClient = axios.create({
   baseURL: config.api.baseUrl,
 });
 

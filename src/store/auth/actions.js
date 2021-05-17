@@ -50,10 +50,10 @@ export const fetchAuthUser = () => {
   };
 };
 
-export const fetchAuthUserSuccess = ({ first_name, last_name }) => {
+export const fetchAuthUserSuccess = ({ id, first_name, last_name }) => {
   return {
     type: FETCH_USER_SUCCESS,
-    payload: { first_name, last_name },
+    payload: { id, first_name, last_name },
   };
 };
 

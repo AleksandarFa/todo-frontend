@@ -1,5 +1,7 @@
-import apiClient from "./baseApiService";
+import { getItem } from "../utils/localStorage";
+import httpService from "./HttpService";
 import { setItem } from "../utils/localStorage";
+import { HTTP_METHODS } from "../constants";
 
 class UserApiService {
   constructor() {
@@ -7,27 +9,27 @@ class UserApiService {
       REGISTER: "auth/register/",
       LOGIN: "auth/login/",
       USER: "users/me/",
+      ALL_TODOS: "api/v1/todos/",
+      CREATE_TODO: "api/v1/create-todo/",
+      SINGLE_TODO: `api/v1/todos/`,
     };
-    this.apiClient = apiClient;
+    this.httpService = httpService;
   }
-
-  attachHeaders = (headers) => {
-    Object.assign(this.apiClient.defaults.headers, headers);
-  };
 
   setAuthToken = (token) => {
     if (token) {
       setItem("token", token);
-      this.attachHeaders({ Authorization: `Bearer ${token}` });
+      this.httpService.attachHeaders({ Authorization: `Bearer ${token}` });
     }
   };
 
   createUser = async (userData) => {
     try {
-      const response = await this.apiClient.post(
-        this.ENDPOINTS.REGISTER,
-        userData
-      );
+      const response = await this.httpService.request({
+        url: this.ENDPOINTS.REGISTER,
+        method: HTTP_METHODS.POST,
+        userData,
+      });
       return response.data;
     } catch (err) {
       console.log(err);
@@ -35,25 +37,84 @@ class UserApiService {
   };
 
   loginUser = async (userData) => {
+    const response = await this.httpService.request({
+      url: this.ENDPOINTS.LOGIN,
+      method: HTTP_METHODS.POST,
+      data: userData,
+    });
+
+    this.setAuthToken(response.data.access);
+
+    return response;
+  };
+
+  fetchUserData = async () => {
+    this.setAuthToken(getItem("token"));
     try {
-      const response = await this.apiClient.post(
-        this.ENDPOINTS.LOGIN,
-        userData
-      );
-      this.setAuthToken(response.data.access);
+      const response = await this.httpService.request({
+        url: this.ENDPOINTS.USER,
+        method: HTTP_METHODS.GET,
+      });
       return response.data;
     } catch (err) {
       console.log(err);
     }
   };
 
-  fetchUserData = async (userData) => {
+  fetchAllUserTodos = async () => {
+    this.setAuthToken(getItem("token"));
     try {
-      const response = await this.apiClient.get(this.ENDPOINTS.USER);
+      const response = await this.httpService.request({
+        url: this.ENDPOINTS.ALL_TODOS,
+        method: HTTP_METHODS.GET,
+      });
       return response.data;
     } catch (err) {
       console.log(err);
     }
+  };
+
+  fetchCurrentTodo = async (todoId) => {
+    this.setAuthToken(getItem("token"));
+    try {
+      const response = await this.httpService.request({
+        url: this.ENDPOINTS.SINGLE_TODO + todoId + "/",
+        method: HTTP_METHODS.GET,
+      });
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  createTodo = async (todoData) => {
+    this.setAuthToken(getItem("token"));
+    try {
+      const response = await this.httpService.request({
+        url: this.ENDPOINTS.CREATE_TODO,
+        method: HTTP_METHODS.POST,
+        data: todoData,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  updateTodo = async (todoId, todoData) => {
+    this.setAuthToken(getItem("token"));
+    const response = await this.httpService.request({
+      url: this.ENDPOINTS.SINGLE_TODO + todoId + "/",
+      method: HTTP_METHODS.PUT,
+      data: todoData,
+    });
+  };
+
+  deleteTodo = async (todoId) => {
+    this.setAuthToken(getItem("token"));
+    const response = await this.httpService.request({
+      url: this.ENDPOINTS.SINGLE_TODO + todoId + "/",
+      method: HTTP_METHODS.DELETE,
+    });
   };
 }
 
