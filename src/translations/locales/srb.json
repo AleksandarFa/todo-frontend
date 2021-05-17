@@ -1,0 +1,22 @@
+{
+    "welcome":{
+        "title":"Aplikacija obaveza"
+    },
+    "login":{
+        "title":"Prijava",
+        "username":"Korisnicko ime:",
+        "password":"Lozinka:"
+    },
+    "register":{
+        "title":"Registracija",
+        "firstName":"Ime:",
+        "lastName":"Prezime:",
+        "confirmPassword":"Potvrdi lozinku:",
+        "email":"Imejl:"
+    },
+    "nav":{
+        "signIn":"Prijava",
+        "signUp":"Registracija",
+        "welcome":"Dobrodosli"
+    }
+}

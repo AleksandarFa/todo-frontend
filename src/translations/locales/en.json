@@ -1,0 +1,22 @@
+{
+    "welcome":{
+        "title":"Todo application"
+    },
+    "login":{
+        "title": "Sign in page",
+        "username":"Username:",
+        "password":"Password:"
+    },
+    "register":{
+        "title":"Sign Up page",
+        "firstName":"First name:",
+        "lastName":"Last name:",
+        "confirmPassword":"Confirm password:",
+        "email":"Email:"
+    },
+    "nav":{
+        "signIn":"Sign In",
+        "signUp":"Sign Up",
+        "welcome":"Welcome"
+    }
+}
